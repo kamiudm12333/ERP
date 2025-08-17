@@ -6,6 +6,9 @@ use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\Backend\ProfileController;
 use App\Http\Controllers\Backend\Setup\StudentClassController;
 use App\Http\Controllers\Backend\Setup\StudentYearController;
+use App\Http\Controllers\Backend\ClientController;
+use App\Http\Controllers\Backend\StudentController;
+use App\Http\Controllers\Backend\EmployeeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -80,6 +83,39 @@ Route::prefix('setups')->group(function() {
     Route::post('student/year/update/{id}', [StudentYearController::class, 'StudentYearUpdate'])->name('update.student.year');
     Route::get('student/year/delete/{id}', [StudentYearController::class, 'StudentYearDelete'])->name('student.year.delete');
 
+});
+
+// CLIENT Management Routes
+Route::prefix('clients')->middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function() {
+    Route::get('/', [ClientController::class, 'index'])->name('clients.index');
+    Route::get('/create', [ClientController::class, 'create'])->name('clients.create');
+    Route::post('/', [ClientController::class, 'store'])->name('clients.store');
+    Route::get('/{client}', [ClientController::class, 'show'])->name('clients.show');
+    Route::get('/{client}/edit', [ClientController::class, 'edit'])->name('clients.edit');
+    Route::put('/{client}', [ClientController::class, 'update'])->name('clients.update');
+    Route::delete('/{client}', [ClientController::class, 'destroy'])->name('clients.destroy');
+});
+
+// STUDENT Management Routes
+Route::prefix('students')->middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function() {
+    Route::get('/', [StudentController::class, 'index'])->name('students.index');
+    Route::get('/create', [StudentController::class, 'create'])->name('students.create');
+    Route::post('/', [StudentController::class, 'store'])->name('students.store');
+    Route::get('/{student}', [StudentController::class, 'show'])->name('students.show');
+    Route::get('/{student}/edit', [StudentController::class, 'edit'])->name('students.edit');
+    Route::put('/{student}', [StudentController::class, 'update'])->name('students.update');
+    Route::delete('/{student}', [StudentController::class, 'destroy'])->name('students.destroy');
+});
+
+// EMPLOYEE Management Routes
+Route::prefix('employees')->middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function() {
+    Route::get('/', [EmployeeController::class, 'index'])->name('employees.index');
+    Route::get('/create', [EmployeeController::class, 'create'])->name('employees.create');
+    Route::post('/', [EmployeeController::class, 'store'])->name('employees.store');
+    Route::get('/{employee}', [EmployeeController::class, 'show'])->name('employees.show');
+    Route::get('/{employee}/edit', [EmployeeController::class, 'edit'])->name('employees.edit');
+    Route::put('/{employee}', [EmployeeController::class, 'update'])->name('employees.update');
+    Route::delete('/{employee}', [EmployeeController::class, 'destroy'])->name('employees.destroy');
 });
 
 
