@@ -75,6 +75,45 @@ $route = Route::current()->getName();
                 </ul>
             </li>
 
+            <li class="treeview {{ ($prefix == '/clients' ? 'active' : '') }}">
+                <a href="#">
+                    <i data-feather="users"></i> <span>Client Management</span>
+                    <span class="pull-right-container">
+              <i class="fa fa-angle-right pull-right"></i>
+            </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="{{ route('clients.index') }}"><i class="ti-more"></i>View Clients</a></li>
+                    <li><a href="{{ route('clients.create') }}"><i class="ti-more"></i>Add Client</a></li>
+                </ul>
+            </li>
+
+            <li class="treeview {{ ($prefix == '/students' ? 'active' : '') }}">
+                <a href="#">
+                    <i data-feather="user-check"></i> <span>Student Management</span>
+                    <span class="pull-right-container">
+              <i class="fa fa-angle-right pull-right"></i>
+            </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="{{ route('students.index') }}"><i class="ti-more"></i>View Students</a></li>
+                    <li><a href="{{ route('students.create') }}"><i class="ti-more"></i>Add Student</a></li>
+                </ul>
+            </li>
+
+            <li class="treeview {{ ($prefix == '/employees' ? 'active' : '') }}">
+                <a href="#">
+                    <i data-feather="briefcase"></i> <span>Employee Management</span>
+                    <span class="pull-right-container">
+              <i class="fa fa-angle-right pull-right"></i>
+            </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="{{ route('employees.index') }}"><i class="ti-more"></i>View Employees</a></li>
+                    <li><a href="{{ route('employees.create') }}"><i class="ti-more"></i>Add Employee</a></li>
+                </ul>
+            </li>
+
 
 
             <li class="header nav-small-cap">User Interface</li>
