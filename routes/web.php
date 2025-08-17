@@ -6,6 +6,11 @@ use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\Backend\ProfileController;
 use App\Http\Controllers\Backend\Setup\StudentClassController;
 use App\Http\Controllers\Backend\Setup\StudentYearController;
+use App\Http\Controllers\Backend\ClientController;
+use App\Http\Controllers\Backend\StudentController;
+use App\Http\Controllers\Backend\EmployeeController;
+use App\Http\Controllers\Backend\ProjectController;
+use App\Http\Controllers\Backend\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,9 +32,7 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified'
 ])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('admin.index');
-    })->name('dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 });
 
 
@@ -80,6 +83,50 @@ Route::prefix('setups')->group(function() {
     Route::post('student/year/update/{id}', [StudentYearController::class, 'StudentYearUpdate'])->name('update.student.year');
     Route::get('student/year/delete/{id}', [StudentYearController::class, 'StudentYearDelete'])->name('student.year.delete');
 
+});
+
+// Client Management Routes
+Route::prefix('clients')->group(function() {
+    Route::get('/', [ClientController::class, 'index'])->name('clients.index');
+    Route::get('/create', [ClientController::class, 'create'])->name('clients.create');
+    Route::post('/', [ClientController::class, 'store'])->name('clients.store');
+    Route::get('/{client}', [ClientController::class, 'show'])->name('clients.show');
+    Route::get('/{client}/edit', [ClientController::class, 'edit'])->name('clients.edit');
+    Route::put('/{client}', [ClientController::class, 'update'])->name('clients.update');
+    Route::delete('/{client}', [ClientController::class, 'destroy'])->name('clients.destroy');
+});
+
+// Student Management Routes
+Route::prefix('students')->group(function() {
+    Route::get('/', [StudentController::class, 'index'])->name('students.index');
+    Route::get('/create', [StudentController::class, 'create'])->name('students.create');
+    Route::post('/', [StudentController::class, 'store'])->name('students.store');
+    Route::get('/{student}', [StudentController::class, 'show'])->name('students.show');
+    Route::get('/{student}/edit', [StudentController::class, 'edit'])->name('students.edit');
+    Route::put('/{student}', [StudentController::class, 'update'])->name('students.update');
+    Route::delete('/{student}', [StudentController::class, 'destroy'])->name('students.destroy');
+});
+
+// Employee Management Routes
+Route::prefix('employees')->group(function() {
+    Route::get('/', [EmployeeController::class, 'index'])->name('employees.index');
+    Route::get('/create', [EmployeeController::class, 'create'])->name('employees.create');
+    Route::post('/', [EmployeeController::class, 'store'])->name('employees.store');
+    Route::get('/{employee}', [EmployeeController::class, 'show'])->name('employees.show');
+    Route::get('/{employee}/edit', [EmployeeController::class, 'edit'])->name('employees.edit');
+    Route::put('/{employee}', [EmployeeController::class, 'update'])->name('employees.update');
+    Route::delete('/{employee}', [EmployeeController::class, 'destroy'])->name('employees.destroy');
+});
+
+// Project Management Routes
+Route::prefix('projects')->group(function() {
+    Route::get('/', [ProjectController::class, 'index'])->name('projects.index');
+    Route::get('/create', [ProjectController::class, 'create'])->name('projects.create');
+    Route::post('/', [ProjectController::class, 'store'])->name('projects.store');
+    Route::get('/{project}', [ProjectController::class, 'show'])->name('projects.show');
+    Route::get('/{project}/edit', [ProjectController::class, 'edit'])->name('projects.edit');
+    Route::put('/{project}', [ProjectController::class, 'update'])->name('projects.update');
+    Route::delete('/{project}', [ProjectController::class, 'destroy'])->name('projects.destroy');
 });
 
 
